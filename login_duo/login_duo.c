@@ -420,7 +420,7 @@ main(int argc, char *argv[])
                 die("waitpid: %s", strerror(errno));
             }
             if (WEXITSTATUS(stat) == 0) {
-                do_exec(ctx, get_command(argc, argv));
+                exit(EXIT_SUCCESS);
             }
         }
     } else {
@@ -428,7 +428,7 @@ main(int argc, char *argv[])
                 
         /* Non-setuid root operation or running as root. */
         if (do_auth(ctx, cmd) == EXIT_SUCCESS) {
-            do_exec(ctx, cmd);
+            exit(EXIT_SUCCESS);
         }
     }
     exit(EXIT_FAILURE);
